@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Project 2 API",
-    "description": "API Documentation for CRUD Operations",
+    "title": "Project 2 REST API",
+    "description": "API Documentation for Products and Categories",
     "version": "1.0.0"
   },
   "host": "localhost:8080",
@@ -22,6 +22,17 @@
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new product",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductInput"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -63,6 +74,15 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update product",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProductInput"
+            }
           }
         ],
         "responses": {
@@ -104,16 +124,30 @@
       "get": {
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
           }
         }
       },
       "post": {
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Add new category",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoryInput"
+            }
+          }
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       }
@@ -130,8 +164,14 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -143,11 +183,26 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Update category",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CategoryInput"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
@@ -162,8 +217,14 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -174,6 +235,72 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CategoryInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Electronics"
+        },
+        "slug": {
+          "type": "string",
+          "example": "electronics"
+        },
+        "description": {
+          "type": "string",
+          "example": "Tech hardware and gadgets"
+        },
+        "isActive": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "ProductInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Wireless Mouse"
+        },
+        "sku": {
+          "type": "string",
+          "example": "MOUSE-101"
+        },
+        "category": {
+          "type": "string",
+          "example": "66f2a1b3c4e5f67890123456"
+        },
+        "price": {
+          "type": "number",
+          "example": 29.99
+        },
+        "stockQuantity": {
+          "type": "number",
+          "example": 50
+        },
+        "inStock": {
+          "type": "boolean",
+          "example": true
+        },
+        "description": {
+          "type": "string",
+          "example": "Ergonomic wireless mouse"
+        },
+        "tags": {
+          "type": "array",
+          "example": [
+            "computer",
+            "accessories"
+          ],
+          "items": {
+            "type": "string"
           }
         }
       }

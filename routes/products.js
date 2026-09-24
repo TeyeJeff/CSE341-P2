@@ -4,8 +4,19 @@ const productsController = require('../controllers/products');
 
 router.get('/', productsController.getAllProducts);
 router.get('/:id', productsController.getSingleProduct);
-router.post('/', productsController.createProduct);
-router.put('/:id', productsController.updateProduct);
+router.post('/', /* #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Add new product',
+        required: true,
+        schema: { $ref: '#/definitions/ProductInput' }
+} */ productsController.createProduct);
+
+router.put('/:id', /* #swagger.parameters['body'] = {
+        in: 'body',
+        description: 'Update product',
+        required: true,
+        schema: { $ref: '#/definitions/ProductInput' }
+} */ productsController.updateProduct);
 router.delete('/:id', productsController.deleteProduct);
 
 module.exports = router;
